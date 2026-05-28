@@ -366,17 +366,6 @@
                         </div>
                     </div>
 
-                    {{-- Integrity bar --}}
-                    <div style="padding:.75rem .95rem;border-top:1px solid var(--color-gh-border);">
-                        @php $score = min(100, max(10, ($link->uptime_status === \App\Enum\UptimeStatus::ONLINE ? 60 : 20) + min(40, $link->check_count * 2))); @endphp
-                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem;">
-                            <span style="font-size:.6rem;font-weight:700;color:var(--color-gh-dim);text-transform:uppercase;letter-spacing:.1em;">Signal Integrity</span>
-                            <span style="font-size:.7rem;font-weight:800;color:{{ $score > 70 ? '#4ade80' : ($score > 40 ? '#facc15' : '#f87171') }};">{{ $score }}%</span>
-                        </div>
-                        <div style="height:4px;background:var(--color-gh-btn-bg);border-radius:2px;overflow:hidden;">
-                            <div style="height:100%;width:{{ $score }}%;background:{{ $score > 70 ? '#4ade80' : ($score > 40 ? '#facc15' : '#f87171') }};border-radius:2px;"></div>
-                        </div>
-                    </div>
                 </div>
 
                 {{-- Sidebar Ads (Internal) --}}
