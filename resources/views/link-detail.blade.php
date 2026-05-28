@@ -152,22 +152,85 @@
                             Report this Link
                             <button onclick="document.getElementById('report-form-container').style.display = 'none'; document.querySelector('button[onclick*=\'report-form-container\']').style.display = 'inline-flex';" style="background:transparent;border:none;color:var(--color-gh-dim);cursor:pointer;font-size:1.2rem;">&times;</button>
                         </h3>
+
+                        @php
+                            // Separate report types for optgroup grouping
+                            $simpleTypes  = array_filter($reportLabel, fn($r) => !$r->isComplex());
+                            $complexTypes = array_filter($reportLabel, fn($r) =>  $r->isComplex());
+
+                            // Build JS lookup: value => { label, description, isComplex }
+                            $typeJsonMap = collect($reportLabel)->mapWithKeys(fn($r) => [
+                                $r->value => [
+                                    'label'       => $r->label(),
+                                    'description' => $r->description(),
+                                    'isComplex'   => $r->isComplex(),
+                                    'color'       => $r->badgeColor(),
+                                ],
+                            ])->toJson();
+                        @endphp
+
+                        <script>
+                            var _reportTypes = {!! $typeJsonMap !!};
+                            function _onReportTypeChange(val) {
+                                var info = _reportTypes[val];
+                                if (!info) return;
+                                var hint = document.getElementById('report-type-hint');
+                                var badge = document.getElementById('report-type-badge');
+                                var emailSection = document.getElementById('report-email-section');
+                                hint.textContent = info.description;
+                                badge.textContent = info.isComplex ? 'High Priority' : 'Standard';
+                                badge.style.color = info.isComplex ? '#f87171' : '#58a6ff';
+                                badge.style.borderColor = info.isComplex ? 'rgba(248,113,113,.3)' : 'rgba(88,166,255,.25)';
+                                badge.style.background = info.isComplex ? 'rgba(248,113,113,.08)' : 'rgba(88,166,255,.08)';
+                                emailSection.style.display = info.isComplex ? 'block' : 'block'; // always show email
+                            }
+                        </script>
+
                         <form action="{{ route('report.store') }}" method="POST">
                             @csrf
                             <input type="hidden" name="link_id" value="{{ $link->id }}">
                             <div style="display:grid;grid-template-columns:1fr;gap:1rem;">
+
+                                {{-- Issue Type select + description hint --}}
                                 <div>
                                     <label style="display:block;font-size:.65rem;font-weight:800;color:var(--color-gh-dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.4rem;">Issue Type</label>
-                                    <select name="type" required class="comment-form-input" style="background:var(--color-gh-bg);">
-                                        @foreach ($reportLabel as $report)
-                                            <option value="{{ $report->value }}">{{ $report->label() }}</option>
-                                        @endforeach
+                                    <select name="type" required class="comment-form-input" style="background:var(--color-gh-bg);" onchange="_onReportTypeChange(this.value)">
+                                        <optgroup label="── Simple Issues">
+                                            @foreach ($simpleTypes as $report)
+                                                <option value="{{ $report->value }}">{{ $report->label() }}</option>
+                                            @endforeach
+                                        </optgroup>
+                                        <optgroup label="── Complex / High Priority">
+                                            @foreach ($complexTypes as $report)
+                                                <option value="{{ $report->value }}">{{ $report->label() }}</option>
+                                            @endforeach
+                                        </optgroup>
                                     </select>
+
+                                    {{-- Dynamic type hint --}}
+                                    <div style="display:flex;align-items:flex-start;gap:.5rem;margin-top:.45rem;">
+                                        <span id="report-type-badge" style="flex-shrink:0;display:inline-block;font-size:.55rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;padding:.15rem .45rem;border-radius:2rem;border:1px solid rgba(88,166,255,.25);color:#58a6ff;background:rgba(88,166,255,.08);">Standard</span>
+                                        <span id="report-type-hint" style="font-size:.68rem;color:var(--color-gh-dim);line-height:1.5;"></span>
+                                    </div>
                                 </div>
+
+                                {{-- Details textarea --}}
                                 <div>
                                     <label style="display:block;font-size:.65rem;font-weight:800;color:var(--color-gh-dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.4rem;">Details (Optional)</label>
                                     <textarea name="message" rows="3" class="comment-form-input" placeholder="Please provide more details about the issue..." style="background:var(--color-gh-bg);resize:vertical;"></textarea>
                                 </div>
+
+                                {{-- Optional email for notification --}}
+                                <div id="report-email-section">
+                                    <label style="display:block;font-size:.65rem;font-weight:800;color:var(--color-gh-dim);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.2rem;">
+                                        Notify Me (Optional)
+                                    </label>
+                                    <p style="font-size:.65rem;color:var(--color-gh-dim);opacity:.7;margin:0 0 .4rem;line-height:1.5;">
+                                        Leave your email if you want to be notified when this report is reviewed. Your address is never shared or stored beyond this report.
+                                    </p>
+                                    <input type="email" name="email" class="comment-form-input" placeholder="your@email.com (optional)" style="background:var(--color-gh-bg);">
+                                </div>
+
                                 <div style="display:flex;justify-content:flex-end;">
                                     <button type="submit" style="padding:.5rem 1.5rem;background:#f87171;color:#fff;border:none;border-radius:.4rem;font-size:.75rem;font-weight:800;cursor:pointer;">Submit Report</button>
                                 </div>

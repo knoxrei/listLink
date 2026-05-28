@@ -12,6 +12,7 @@ class Report extends Model
         'user_id',
         'type',
         'message',
+        'email',
         'status',
     ];
 
