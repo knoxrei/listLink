@@ -70,7 +70,7 @@
 
 
 
-     
+
 
         {{-- Hero --}}
         <div
@@ -192,11 +192,11 @@
                     title="Dismiss">✕</button>
         </div>
 
-   
+
 
         {{-- Internal & AdMate Ads Section --}}
         <div style="margin-top: 3rem; width: 100%; max-width: 970px; display: flex; flex-direction: column; align-items: center; gap: 1.5rem;">
-            
+
 
 
             {{-- Internal Header Ads --}}
@@ -226,81 +226,6 @@
     </div>
 
     {{-- Live Activity --}}
-    <div class="activity-grid">
-        <div>
-            <h3
-                style="font-size:.65rem;font-weight:800;color:var(--color-gh-dim);text-transform:uppercase;letter-spacing:.18em;margin:0 0 .75rem;padding-left:.5rem;border-left:2px solid var(--color-gh-accent);">
-                Recent Discoveries</h3>
-            <div style="display:flex;flex-direction:column;gap:.5rem;">
-                @foreach ($recentlyAddedLinks->take(4) as $link)
-                    <a href="{{ route('link.show', $link->slug) }}"
-                        style="display:flex;justify-content:space-between;align-items:center;text-decoration:none;font-size:.78rem;color:var(--color-gh-text);">
-                        <span
-                            style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px;">{{ $link->title }}</span>
-                        <span
-                            style="font-size:.65rem;color:var(--color-gh-dim);flex-shrink:0;margin-left:.5rem;">{{ $link->created_at->diffForHumans() }}</span>
-                    </a>
-                @endforeach
-            </div>
-        </div>
-        <div>
-            <h3
-                style="font-size:.65rem;font-weight:800;color:var(--color-gh-dim);text-transform:uppercase;letter-spacing:.18em;margin:0 0 .75rem;padding-left:.5rem;border-left:2px solid #4ade80;">
-                Recent Registrations</h3>
-            @if($recentlyRegisteredUser)
-                <div style="display:flex;align-items:center;gap:.75rem;">
-            
-                    <div>
-                        <span
-                            style="font-size:.78rem;font-weight:700;color:#fff;display:block;">{{ $recentlyRegisteredUser->username }}</span>
-                        <span style="font-size:.65rem;color:var(--color-gh-dim);">Registered
-                            {{ $recentlyRegisteredUser->created_at->diffForHumans() }}</span>
-                    </div>
-                </div>
-            @endif
-        </div>
-        <div>
-            <h3
-                style="font-size:.65rem;font-weight:800;color:var(--color-gh-dim);text-transform:uppercase;letter-spacing:.18em;margin:0 0 .75rem;padding-left:.5rem;border-left:2px solid #f78166;">
-                Top Commented</h3>
-            <div style="display:flex;flex-direction:column;gap:.5rem;">
-                @foreach ($topCommentedLinks as $link)
-                    <a href="{{ route('link.show', $link->slug) }}"
-                        style="display:flex;justify-content:space-between;align-items:center;text-decoration:none;font-size:.78rem;color:var(--color-gh-text);">
-                        <span
-                            style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px;">{{ $link->title }}</span>
-                        <div style="display:flex;align-items:center;gap:.3rem;flex-shrink:0;">
-                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--color-gh-dim)" stroke-width="2.5">
-                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                            </svg>
-                            <span style="font-size:.65rem;color:var(--color-gh-dim);">{{ $link->comments_count }}</span>
-                        </div>
-                    </a>
-                @endforeach
-            </div>
-        </div>
-        <div>
-            <h3
-                style="font-size:.65rem;font-weight:800;color:var(--color-gh-dim);text-transform:uppercase;letter-spacing:.18em;margin:0 0 .75rem;padding-left:.5rem;border-left:2px solid #ffcc00;">
-                Trending Topics</h3>
-            <div style="display:flex;flex-direction:column;gap:.5rem;">
-                @foreach ($trendingLinks as $link)
-                    <a href="{{ route('link.show', $link->slug) }}"
-                        style="display:flex;justify-content:space-between;align-items:center;text-decoration:none;font-size:.78rem;color:var(--color-gh-text);">
-                        <span
-                            style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:180px;">{{ $link->title }}</span>
-                        <div style="display:flex;align-items:center;gap:.3rem;flex-shrink:0;">
-                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="3">
-                                <path d="M12 19V5M5 12l7-7 7 7"/>
-                            </svg>
-                            <span style="font-size:.65rem;color:#4ade80;font-weight:700;">{{ $link->likes_count - $link->dislikes_count }}</span>
-                        </div>
-                    </a>
-                @endforeach
-            </div>
-        </div>
-    </div>
-
 
 
 
