@@ -227,44 +227,41 @@
 
     {{-- Live Activity --}}
     @if($latestUser || $latestLink)
-        <div style="width:100%;max-width:970px;margin:2rem auto;padding:0.75rem 1rem;font-size:0.72rem;color:var(--color-gh-dim);display:flex;justify-content:center;align-items:center;gap:1.2rem;flex-wrap:wrap;border-top:1px solid rgba(48,54,61,0.3);border-bottom:1px solid rgba(48,54,61,0.3);">
-            <div style="display:flex;align-items:center;gap:0.4rem;">
-                <span style="display:inline-block;width:6px;height:6px;background:#58a6ff;border-radius:50%;"></span>
-                <span style="font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.05em;">Newest Citizen:</span>
-                @if($latestUser)
-                    <span style="color:var(--color-gh-accent);font-weight:600;">{{ $latestUser->username }}</span>
-                    <span style="font-size:0.65rem;opacity:0.8;">({{ $latestUser->created_at->diffForHumans() }})</span>
-                @else
-                    <span>None</span>
-                @endif
-            </div>
-
-            <span style="color:var(--color-gh-border);">|</span>
-
-            <div style="display:flex;align-items:center;gap:0.4rem;">
-                <span style="display:inline-block;width:6px;height:6px;background:#3fb950;border-radius:50%;"></span>
-                <span style="font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.05em;">Newest Link:</span>
-                @if($latestLink)
-                    <a href="{{ route('link.show', $latestLink->id) }}" style="color:var(--color-gh-accent);font-weight:600;text-decoration:none;">
-                        {{ \Illuminate\Support\Str::limit($latestLink->title, 35) }}
-                    </a>
-                    <span style="font-size:0.65rem;opacity:0.8;">by {{ $latestLink->user ? $latestLink->user->username : 'Anonymous' }} ({{ $latestLink->created_at->diffForHumans() }})</span>
-                @else
-                    <span>None</span>
-                @endif
-            </div>
-
-            @if($latestComment)
-                <span style="color:var(--color-gh-border);">|</span>
-
-                <div style="display:flex;align-items:center;gap:0.4rem;">
-                    <span style="display:inline-block;width:6px;height:6px;background:#ab7df6;border-radius:50%;"></span>
-                    <span style="font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.05em;">Newest Intel:</span>
-                    <span style="color:var(--color-gh-dim);">"{{ \Illuminate\Support\Str::limit($latestComment->content, 30) }}"</span>
-                    <span style="font-size:0.65rem;opacity:0.8;">by {{ $latestComment->username }} ({{ $latestComment->created_at->diffForHumans() }})</span>
-                </div>
+    <div style="width:100%;max-width:970px;margin:2rem auto;padding:0.75rem 1rem;font-size:0.72rem;color:var(--color-gh-dim);display:flex;justify-content:center;align-items:center;gap:1.2rem;flex-wrap:wrap;border-top:1px solid rgba(48,54,61,0.3);border-bottom:1px solid rgba(48,54,61,0.3);">
+        <div style="display:flex;align-items:center;gap:0.4rem;">
+            <span style="font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.05em;">Last Registered:</span>
+            @if($latestUser)
+            <span style="color:var(--color-gh-accent);font-weight:600;">{{ $latestUser->username }}</span>
+            <span style="font-size:0.65rem;opacity:0.8;">({{ $latestUser->created_at->diffForHumans() }})</span>
+            @else
+            <span>None</span>
             @endif
         </div>
+
+        <span style="color:var(--color-gh-border);">|</span>
+
+        <div style="display:flex;align-items:center;gap:0.4rem;">
+            <span style="font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.05em;">Last Link:</span>
+            @if($latestLink)
+            <a href="{{ route('link.show', $latestLink->id) }}" style="color:var(--color-gh-accent);font-weight:600;text-decoration:none;">
+                {{ \Illuminate\Support\Str::limit($latestLink->title, 35) }}
+            </a>
+            <span style="font-size:0.65rem;opacity:0.8;">by {{ $latestLink->user ? $latestLink->user->username : 'Anonymous' }} ({{ $latestLink->created_at->diffForHumans() }})</span>
+            @else
+            <span>None</span>
+            @endif
+        </div>
+
+        @if($latestComment)
+        <span style="color:var(--color-gh-border);">|</span>
+
+        <div style="display:flex;align-items:center;gap:0.4rem;">
+            <span style="font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.05em;">Last Comment:</span>
+            <span style="color:var(--color-gh-dim);">"{{ \Illuminate\Support\Str::limit($latestComment->content, 30) }}"</span>
+            <span style="font-size:0.65rem;opacity:0.8;">by {{ $latestComment->username }} ({{ $latestComment->created_at->diffForHumans() }})</span>
+        </div>
+        @endif
+    </div>
     @endif
 
 </x-app.layouts>
