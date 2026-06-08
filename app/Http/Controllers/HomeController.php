@@ -135,7 +135,7 @@ class HomeController extends Controller
             ->with('user')
             ->latest()
             ->first();
-        $latestComment = Comment::with(['user', 'link'])->latest()->first();
+        $latestComment = Comment::with(['link'])->latest()->first();
 
         // Track impressions
         AdTrackingController::trackImpressions($headerAds);

@@ -261,7 +261,7 @@
                     <span style="display:inline-block;width:6px;height:6px;background:#ab7df6;border-radius:50%;"></span>
                     <span style="font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.05em;">Newest Intel:</span>
                     <span style="color:var(--color-gh-dim);">"{{ \Illuminate\Support\Str::limit($latestComment->content, 30) }}"</span>
-                    <span style="font-size:0.65rem;opacity:0.8;">by {{ $latestComment->user->username }} ({{ $latestComment->created_at->diffForHumans() }})</span>
+                    <span style="font-size:0.65rem;opacity:0.8;">by {{ $latestComment->username }} ({{ $latestComment->created_at->diffForHumans() }})</span>
                 </div>
             @endif
         </div>
