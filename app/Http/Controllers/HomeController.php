@@ -136,7 +136,6 @@ class HomeController extends Controller
             ->latest()
             ->take(5)
             ->get();
-        $latestComments = Comment::with(['user', 'link'])->latest()->take(5)->get();
 
         // Track impressions
         AdTrackingController::trackImpressions($headerAds);
@@ -198,11 +197,11 @@ class HomeController extends Controller
         ];
 
         // Group by priority
-        $highTiers = $ads->filter(fn ($ad) => ($priorities[$ad->package_tier] ?? 0) >= 6);
-        $lowTiers = $ads->filter(fn ($ad) => ($priorities[$ad->package_tier] ?? 0) < 6);
+        $highTiers = $ads->filter(fn($ad) => ($priorities[$ad->package_tier] ?? 0) >= 6);
+        $lowTiers = $ads->filter(fn($ad) => ($priorities[$ad->package_tier] ?? 0) < 6);
 
         // Sort high tiers by absolute priority
-        $highSorted = $highTiers->sortByDesc(fn ($ad) => $priorities[$ad->package_tier] ?? 0);
+        $highSorted = $highTiers->sortByDesc(fn($ad) => $priorities[$ad->package_tier] ?? 0);
 
         // Shuffle low tiers to keep it fair for basic ads
         $lowShuffled = $lowTiers->shuffle();

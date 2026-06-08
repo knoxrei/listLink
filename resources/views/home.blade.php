@@ -85,59 +85,59 @@
 
             {{-- ── Dual Gateway Badge ── --}}
             @php
-                $torUrl = config('site.tor_url');
-                $clearnetUrl = config('site.clearnet_url');
-                $currentHost = request()->getHost();
-                $torHost = parse_url($torUrl, PHP_URL_HOST);
-                $isOnTor = $torHost && str_ends_with($currentHost, $torHost);
+            $torUrl = config('site.tor_url');
+            $clearnetUrl = config('site.clearnet_url');
+            $currentHost = request()->getHost();
+            $torHost = parse_url($torUrl, PHP_URL_HOST);
+            $isOnTor = $torHost && str_ends_with($currentHost, $torHost);
             @endphp
             @if($clearnetUrl)
-                <div
-                    style="display:flex;align-items:center;gap:.5rem;margin-top:.85rem;flex-wrap:wrap;justify-content:center;">
-                    {{-- Tor Gate --}}
-                    <a href="{{ $torUrl }}" title="Access via Tor Network"
-                        style="display:inline-flex;align-items:center;gap:.35rem;padding:.3rem .7rem;border-radius:2rem;border:1px solid {{ $isOnTor ? 'rgba(74,222,128,.55)' : 'rgba(48,54,61,.7)' }};background:{{ $isOnTor ? 'rgba(74,222,128,.08)' : 'rgba(13,17,23,.6)' }};text-decoration:none;">
-                        {{-- Tor onion SVG --}}
-                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
-                            stroke="{{ $isOnTor ? '#4ade80' : 'var(--color-gh-dim)' }}" stroke-width="2.5"
-                            stroke-linecap="round">
-                            <circle cx="12" cy="12" r="10" />
-                            <path
-                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-                            <path d="M2 12h20" />
-                        </svg>
-                        <span
-                            style="font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:{{ $isOnTor ? '#4ade80' : 'var(--color-gh-dim)' }};">
-                            Tor Gate
-                        </span>
-                        @if($isOnTor)
-                            <span
-                                style="width:5px;height:5px;border-radius:50%;background:#4ade80;box-shadow:0 0 5px #4ade80;"></span>
-                        @endif
-                    </a>
+            <div
+                style="display:flex;align-items:center;gap:.5rem;margin-top:.85rem;flex-wrap:wrap;justify-content:center;">
+                {{-- Tor Gate --}}
+                <a href="{{ $torUrl }}" title="Access via Tor Network"
+                    style="display:inline-flex;align-items:center;gap:.35rem;padding:.3rem .7rem;border-radius:2rem;border:1px solid {{ $isOnTor ? 'rgba(74,222,128,.55)' : 'rgba(48,54,61,.7)' }};background:{{ $isOnTor ? 'rgba(74,222,128,.08)' : 'rgba(13,17,23,.6)' }};text-decoration:none;">
+                    {{-- Tor onion SVG --}}
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+                        stroke="{{ $isOnTor ? '#4ade80' : 'var(--color-gh-dim)' }}" stroke-width="2.5"
+                        stroke-linecap="round">
+                        <circle cx="12" cy="12" r="10" />
+                        <path
+                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                        <path d="M2 12h20" />
+                    </svg>
+                    <span
+                        style="font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:{{ $isOnTor ? '#4ade80' : 'var(--color-gh-dim)' }};">
+                        Tor Gate
+                    </span>
+                    @if($isOnTor)
+                    <span
+                        style="width:5px;height:5px;border-radius:50%;background:#4ade80;box-shadow:0 0 5px #4ade80;"></span>
+                    @endif
+                </a>
 
-                    <span style="color:var(--color-gh-border);font-size:.65rem;">↔</span>
+                <span style="color:var(--color-gh-border);font-size:.65rem;">↔</span>
 
-                    {{-- Clearnet Gate --}}
-                    <a href="{{ $clearnetUrl }}" title="Access via Clearnet (HTTPS)"
-                        style="display:inline-flex;align-items:center;gap:.35rem;padding:.3rem .7rem;border-radius:2rem;border:1px solid {{ !$isOnTor ? 'rgba(88,166,255,.55)' : 'rgba(48,54,61,.7)' }};background:{{ !$isOnTor ? 'rgba(88,166,255,.08)' : 'rgba(13,17,23,.6)' }};text-decoration:none;">
-                        {{-- HTTPS lock SVG --}}
-                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
-                            stroke="{{ !$isOnTor ? 'var(--color-gh-accent)' : 'var(--color-gh-dim)' }}" stroke-width="2.5"
-                            stroke-linecap="round">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-                            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-                        </svg>
-                        <span
-                            style="font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:{{ !$isOnTor ? 'var(--color-gh-accent)' : 'var(--color-gh-dim)' }};">
-                            Clearnet Gate
-                        </span>
-                        @if(!$isOnTor)
-                            <span
-                                style="width:5px;height:5px;border-radius:50%;background:var(--color-gh-accent);box-shadow:0 0 5px var(--color-gh-accent);"></span>
-                        @endif
-                    </a>
-                </div>
+                {{-- Clearnet Gate --}}
+                <a href="{{ $clearnetUrl }}" title="Access via Clearnet (HTTPS)"
+                    style="display:inline-flex;align-items:center;gap:.35rem;padding:.3rem .7rem;border-radius:2rem;border:1px solid {{ !$isOnTor ? 'rgba(88,166,255,.55)' : 'rgba(48,54,61,.7)' }};background:{{ !$isOnTor ? 'rgba(88,166,255,.08)' : 'rgba(13,17,23,.6)' }};text-decoration:none;">
+                    {{-- HTTPS lock SVG --}}
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
+                        stroke="{{ !$isOnTor ? 'var(--color-gh-accent)' : 'var(--color-gh-dim)' }}" stroke-width="2.5"
+                        stroke-linecap="round">
+                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                    </svg>
+                    <span
+                        style="font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:{{ !$isOnTor ? 'var(--color-gh-accent)' : 'var(--color-gh-dim)' }};">
+                        Clearnet Gate
+                    </span>
+                    @if(!$isOnTor)
+                    <span
+                        style="width:5px;height:5px;border-radius:50%;background:var(--color-gh-accent);box-shadow:0 0 5px var(--color-gh-accent);"></span>
+                    @endif
+                </a>
+            </div>
             @endif
         </div>
 
@@ -188,8 +188,8 @@
                 </span>
             </div>
             <button onclick="this.parentElement.style.display='none';"
-                    style="background:none;border:none;color:var(--color-gh-dim);cursor:pointer;font-size:.85rem;padding:0 .1rem;flex-shrink:0;line-height:1;opacity:.6;"
-                    title="Dismiss">✕</button>
+                style="background:none;border:none;color:var(--color-gh-dim);cursor:pointer;font-size:.85rem;padding:0 .1rem;flex-shrink:0;line-height:1;opacity:.6;"
+                title="Dismiss">✕</button>
         </div>
 
 
@@ -201,24 +201,24 @@
 
             {{-- Internal Header Ads --}}
             @if (isset($headerAds) && $headerAds->count() > 0)
-                <div class="home-ads-grid">
-                    @foreach ($headerAds as $ad)
-                        <div style="position:relative;width:468px;height:60px;border-radius:.4rem;overflow:hidden;border:1px solid var(--color-gh-border);flex-shrink:0;">
-                            @if ($ad->banner_path)
-                                <a href="{{ route('ad.track', $ad->id) }}" style="display:block;width:100%;height:100%;">
-                                    <img src="{{ asset('storage/' . $ad->banner_path) }}" alt="{{ $ad->title }}" style="width:100%;height:100%;object-fit:cover;">
-                                </a>
-                            @else
-                                <a href="{{ route('ad.track', $ad->id) }}" style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;text-decoration:none;background:var(--color-gh-btn-bg);">
-                                    <div style="text-align:center;">
-                                        <div style="font-size:.7rem;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.05em;">{{ $ad->title }}</div>
-                                        <div style="font-size:.55rem;font-family:monospace;color:var(--color-gh-dim);opacity:.6;">{{ $ad->url }}</div>
-                                    </div>
-                                </a>
-                            @endif
+            <div class="home-ads-grid">
+                @foreach ($headerAds as $ad)
+                <div style="position:relative;width:468px;height:60px;border-radius:.4rem;overflow:hidden;border:1px solid var(--color-gh-border);flex-shrink:0;">
+                    @if ($ad->banner_path)
+                    <a href="{{ route('ad.track', $ad->id) }}" style="display:block;width:100%;height:100%;">
+                        <img src="{{ asset('storage/' . $ad->banner_path) }}" alt="{{ $ad->title }}" style="width:100%;height:100%;object-fit:cover;">
+                    </a>
+                    @else
+                    <a href="{{ route('ad.track', $ad->id) }}" style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;text-decoration:none;background:var(--color-gh-btn-bg);">
+                        <div style="text-align:center;">
+                            <div style="font-size:.7rem;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.05em;">{{ $ad->title }}</div>
+                            <div style="font-size:.55rem;font-family:monospace;color:var(--color-gh-dim);opacity:.6;">{{ $ad->url }}</div>
                         </div>
-                    @endforeach
+                    </a>
+                    @endif
                 </div>
+                @endforeach
+            </div>
             @endif
 
         </div>
@@ -228,7 +228,9 @@
     {{-- Live Activity --}}
     <div style="width:100%;max-width:1100px;margin:3rem auto;padding:0 1rem;">
         <h2 style="font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:1.5rem;text-transform:uppercase;letter-spacing:.05em;display:flex;align-items:center;gap:.5rem;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-gh-accent);"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-gh-accent);">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+            </svg>
             Live Activity
         </h2>
 
@@ -238,15 +240,15 @@
                 <h3 style="font-size:.85rem;color:var(--color-gh-dim);text-transform:uppercase;letter-spacing:.1em;margin:0 0 1rem;padding-bottom:.5rem;border-bottom:1px solid var(--color-gh-border);">New Citizens</h3>
                 <div style="display:flex;flex-direction:column;gap:.8rem;">
                     @foreach($latestUsers as $user)
-                        <div style="display:flex;align-items:center;gap:.75rem;">
-                            <div style="width:32px;height:32px;border-radius:50%;background:rgba(88,166,255,.1);border:1px solid rgba(88,166,255,.2);display:flex;align-items:center;justify-content:center;color:var(--color-gh-accent);font-weight:700;font-size:.8rem;">
-                                {{ substr($user->username, 0, 1) }}
-                            </div>
-                            <div style="flex:1;min-width:0;">
-                                <div style="font-size:.85rem;color:#fff;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ $user->username }}</div>
-                                <div style="font-size:.65rem;color:var(--color-gh-dim);">Joined {{ $user->created_at->diffForHumans() }}</div>
-                            </div>
+                    <div style="display:flex;align-items:center;gap:.75rem;">
+                        <div style="width:32px;height:32px;border-radius:50%;background:rgba(88,166,255,.1);border:1px solid rgba(88,166,255,.2);display:flex;align-items:center;justify-content:center;color:var(--color-gh-accent);font-weight:700;font-size:.8rem;">
+                            {{ substr($user->username, 0, 1) }}
                         </div>
+                        <div style="flex:1;min-width:0;">
+                            <div style="font-size:.85rem;color:#fff;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ $user->username }}</div>
+                            <div style="font-size:.65rem;color:var(--color-gh-dim);">Joined {{ $user->created_at->diffForHumans() }}</div>
+                        </div>
+                    </div>
                     @endforeach
                 </div>
             </div>
@@ -256,40 +258,19 @@
                 <h3 style="font-size:.85rem;color:var(--color-gh-dim);text-transform:uppercase;letter-spacing:.1em;margin:0 0 1rem;padding-bottom:.5rem;border-bottom:1px solid var(--color-gh-border);">New Links</h3>
                 <div style="display:flex;flex-direction:column;gap:.8rem;">
                     @foreach($latestLinks as $link)
-                        <div style="display:flex;flex-direction:column;gap:.2rem;border-bottom:1px solid rgba(48,54,61,.4);padding-bottom:.5rem;">
-                            <a href="{{ route('link.show', $link->id) }}" style="font-size:.85rem;color:var(--color-gh-accent);font-weight:600;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
-                                {{ $link->title }}
-                            </a>
-                            <div style="font-size:.65rem;color:var(--color-gh-dim);display:flex;align-items:center;gap:.3rem;">
-                                Added by <span style="color:#fff;">{{ $link->user ? $link->user->username : 'Anonymous' }}</span> • {{ $link->created_at->diffForHumans() }}
-                            </div>
+                    <div style="display:flex;flex-direction:column;gap:.2rem;border-bottom:1px solid rgba(48,54,61,.4);padding-bottom:.5rem;">
+                        <a href="{{ route('link.show', $link->id) }}" style="font-size:.85rem;color:var(--color-gh-accent);font-weight:600;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                            {{ $link->title }}
+                        </a>
+                        <div style="font-size:.65rem;color:var(--color-gh-dim);display:flex;align-items:center;gap:.3rem;">
+                            Added by <span style="color:#fff;">{{ $link->user ? $link->user->username : 'Anonymous' }}</span> • {{ $link->created_at->diffForHumans() }}
                         </div>
+                    </div>
                     @endforeach
                 </div>
             </div>
 
-            {{-- Latest Comments --}}
-            <div style="background:var(--color-gh-bg);border:1px solid var(--color-gh-border);border-radius:.6rem;padding:1.2rem;">
-                <h3 style="font-size:.85rem;color:var(--color-gh-dim);text-transform:uppercase;letter-spacing:.1em;margin:0 0 1rem;padding-bottom:.5rem;border-bottom:1px solid var(--color-gh-border);">Recent Intel</h3>
-                <div style="display:flex;flex-direction:column;gap:.8rem;">
-                    @foreach($latestComments as $comment)
-                        <div style="display:flex;flex-direction:column;gap:.3rem;border-bottom:1px solid rgba(48,54,61,.4);padding-bottom:.5rem;">
-                            <div style="font-size:.75rem;color:#fff;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">
-                                "{{ \Illuminate\Support\Str::limit($comment->content, 80) }}"
-                            </div>
-                            <div style="font-size:.65rem;color:var(--color-gh-dim);display:flex;align-items:center;gap:.3rem;flex-wrap:wrap;">
-                                <span style="color:#fff;font-weight:600;">{{ $comment->user->username }}</span> on
-                                @if($comment->link)
-                                    <a href="{{ route('link.show', $comment->link->id) }}" style="color:var(--color-gh-accent);text-decoration:none;">{{ \Illuminate\Support\Str::limit($comment->link->title, 15) }}</a>
-                                @else
-                                    <span style="color:var(--color-gh-dim);">Unknown Link</span>
-                                @endif
-                                • {{ $comment->created_at->diffForHumans() }}
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
+
         </div>
     </div>
 
