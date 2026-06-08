@@ -166,7 +166,7 @@ class HomeController extends Controller
             'trendingLinks',
             'latestUsers',
             'latestLinks',
-            'latestComments'
+
         );
     }
 
