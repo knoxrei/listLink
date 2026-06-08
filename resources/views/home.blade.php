@@ -243,7 +243,7 @@
         <div style="display:flex;align-items:center;gap:0.4rem;">
             <span style="font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.05em;">Last Link:</span>
             @if($latestLink)
-            <a href="{{ route('link.show', $latestLink->id) }}" style="color:var(--color-gh-accent);font-weight:600;text-decoration:none;">
+            <a href="{{ route('link.show', $latestLink->slug) }}" style="color:var(--color-gh-accent);font-weight:600;text-decoration:none;">
                 {{ \Illuminate\Support\Str::limit($latestLink->title, 35) }}
             </a>
             <span style="font-size:0.65rem;opacity:0.8;">by {{ $latestLink->user ? $latestLink->user->username : 'Anonymous' }} ({{ $latestLink->created_at->diffForHumans() }})</span>
