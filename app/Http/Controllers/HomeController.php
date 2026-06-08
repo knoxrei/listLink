@@ -129,13 +129,13 @@ class HomeController extends Controller
         $recentlyRegisteredUser = User::latest()
             ->first();
 
-        $latestUsers = User::latest()->take(5)->get();
-        $latestLinks = Link::active()
+        $latestUser = User::latest()->first();
+        $latestLink = Link::active()
             ->online()
             ->with('user')
             ->latest()
-            ->take(5)
-            ->get();
+            ->first();
+        $latestComment = Comment::with(['user', 'link'])->latest()->first();
 
         // Track impressions
         AdTrackingController::trackImpressions($headerAds);
@@ -162,11 +162,10 @@ class HomeController extends Controller
             'stats',
             'recentlyAddedLinks',
             'recentlyRegisteredUser',
-            'topCommentedLinks',
             'trendingLinks',
-            'latestUsers',
-            'latestLinks',
-
+            'latestUser',
+            'latestLink',
+            'latestComment'
         );
     }
 
@@ -197,11 +196,11 @@ class HomeController extends Controller
         ];
 
         // Group by priority
-        $highTiers = $ads->filter(fn($ad) => ($priorities[$ad->package_tier] ?? 0) >= 6);
-        $lowTiers = $ads->filter(fn($ad) => ($priorities[$ad->package_tier] ?? 0) < 6);
+        $highTiers = $ads->filter(fn ($ad) => ($priorities[$ad->package_tier] ?? 0) >= 6);
+        $lowTiers = $ads->filter(fn ($ad) => ($priorities[$ad->package_tier] ?? 0) < 6);
 
         // Sort high tiers by absolute priority
-        $highSorted = $highTiers->sortByDesc(fn($ad) => $priorities[$ad->package_tier] ?? 0);
+        $highSorted = $highTiers->sortByDesc(fn ($ad) => $priorities[$ad->package_tier] ?? 0);
 
         // Shuffle low tiers to keep it fair for basic ads
         $lowShuffled = $lowTiers->shuffle();
