@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Enum\Category;
 use App\Enum\AdPlacement;
+use App\Enum\Category;
 use App\Models\Advertisement;
+use App\Models\Comment;
+use App\Models\CrawlContent;
 use App\Models\Link;
 use App\Models\User;
+use App\Models\Visitor;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use App\Http\Controllers\AdTrackingController;
 
 class HomeController extends Controller
 {
@@ -17,6 +20,7 @@ class HomeController extends Controller
     {
         $this->trackVisitor($request);
         $data = $this->getHomeData();
+
         return view('home', $data);
     }
 
@@ -25,8 +29,8 @@ class HomeController extends Controller
         $sessionId = $request->session()->getId();
         $ipAddress = $request->ip();
 
-        $visitor = \App\Models\Visitor::firstOrNew(['session_id' => $sessionId]);
-        if (!$visitor->exists) {
+        $visitor = Visitor::firstOrNew(['session_id' => $sessionId]);
+        if (! $visitor->exists) {
             $visitor->ip_address = $ipAddress;
             $visitor->views = 1;
         }
@@ -37,6 +41,7 @@ class HomeController extends Controller
     public function directory(): View
     {
         $data = $this->getHomeData();
+
         return view('directory', $data);
     }
 
@@ -108,10 +113,10 @@ class HomeController extends Controller
             'total_links' => Link::active()->count(),
             'online_links' => Link::active()->where('uptime_status', 'online')->count(),
             'categories' => count($categories),
-            'indexed_count' => \App\Models\CrawlContent::count(),
+            'indexed_count' => CrawlContent::count(),
             'total_users' => User::count(),
-            'live_viewers' => \App\Models\Visitor::where('last_active_at', '>=', now()->subMinutes(5))->count(),
-            'total_views' => \App\Models\Visitor::count(),
+            'live_viewers' => Visitor::where('last_active_at', '>=', now()->subMinutes(5))->count(),
+            'total_views' => Visitor::count(),
         ];
 
         $recentlyAddedLinks = Link::active()
@@ -123,6 +128,15 @@ class HomeController extends Controller
 
         $recentlyRegisteredUser = User::latest()
             ->first();
+
+        $latestUsers = User::latest()->take(5)->get();
+        $latestLinks = Link::active()
+            ->online()
+            ->with('user')
+            ->latest()
+            ->take(5)
+            ->get();
+        $latestComments = Comment::with(['user', 'link'])->latest()->take(5)->get();
 
         // Track impressions
         AdTrackingController::trackImpressions($headerAds);
@@ -150,7 +164,10 @@ class HomeController extends Controller
             'recentlyAddedLinks',
             'recentlyRegisteredUser',
             'topCommentedLinks',
-            'trendingLinks'
+            'trendingLinks',
+            'latestUsers',
+            'latestLinks',
+            'latestComments'
         );
     }
 
@@ -162,7 +179,7 @@ class HomeController extends Controller
     /**
      * Fetch ads sorted by package priority (Elite > Pro > Premium > Others shuffled).
      */
-    private function getOrderedAds($query): \Illuminate\Database\Eloquent\Collection
+    private function getOrderedAds($query): Collection
     {
         $ads = (clone $query)->get();
 
@@ -181,11 +198,11 @@ class HomeController extends Controller
         ];
 
         // Group by priority
-        $highTiers = $ads->filter(fn($ad) => ($priorities[$ad->package_tier] ?? 0) >= 6);
-        $lowTiers = $ads->filter(fn($ad) => ($priorities[$ad->package_tier] ?? 0) < 6);
+        $highTiers = $ads->filter(fn ($ad) => ($priorities[$ad->package_tier] ?? 0) >= 6);
+        $lowTiers = $ads->filter(fn ($ad) => ($priorities[$ad->package_tier] ?? 0) < 6);
 
         // Sort high tiers by absolute priority
-        $highSorted = $highTiers->sortByDesc(fn($ad) => $priorities[$ad->package_tier] ?? 0);
+        $highSorted = $highTiers->sortByDesc(fn ($ad) => $priorities[$ad->package_tier] ?? 0);
 
         // Shuffle low tiers to keep it fair for basic ads
         $lowShuffled = $lowTiers->shuffle();

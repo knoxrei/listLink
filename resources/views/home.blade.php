@@ -226,7 +226,71 @@
     </div>
 
     {{-- Live Activity --}}
+    <div style="width:100%;max-width:1100px;margin:3rem auto;padding:0 1rem;">
+        <h2 style="font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:1.5rem;text-transform:uppercase;letter-spacing:.05em;display:flex;align-items:center;gap:.5rem;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--color-gh-accent);"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            Live Activity
+        </h2>
 
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;">
+            {{-- Latest Users --}}
+            <div style="background:var(--color-gh-bg);border:1px solid var(--color-gh-border);border-radius:.6rem;padding:1.2rem;">
+                <h3 style="font-size:.85rem;color:var(--color-gh-dim);text-transform:uppercase;letter-spacing:.1em;margin:0 0 1rem;padding-bottom:.5rem;border-bottom:1px solid var(--color-gh-border);">New Citizens</h3>
+                <div style="display:flex;flex-direction:column;gap:.8rem;">
+                    @foreach($latestUsers as $user)
+                        <div style="display:flex;align-items:center;gap:.75rem;">
+                            <div style="width:32px;height:32px;border-radius:50%;background:rgba(88,166,255,.1);border:1px solid rgba(88,166,255,.2);display:flex;align-items:center;justify-content:center;color:var(--color-gh-accent);font-weight:700;font-size:.8rem;">
+                                {{ substr($user->username, 0, 1) }}
+                            </div>
+                            <div style="flex:1;min-width:0;">
+                                <div style="font-size:.85rem;color:#fff;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ $user->username }}</div>
+                                <div style="font-size:.65rem;color:var(--color-gh-dim);">Joined {{ $user->created_at->diffForHumans() }}</div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
 
+            {{-- Latest Links --}}
+            <div style="background:var(--color-gh-bg);border:1px solid var(--color-gh-border);border-radius:.6rem;padding:1.2rem;">
+                <h3 style="font-size:.85rem;color:var(--color-gh-dim);text-transform:uppercase;letter-spacing:.1em;margin:0 0 1rem;padding-bottom:.5rem;border-bottom:1px solid var(--color-gh-border);">New Links</h3>
+                <div style="display:flex;flex-direction:column;gap:.8rem;">
+                    @foreach($latestLinks as $link)
+                        <div style="display:flex;flex-direction:column;gap:.2rem;border-bottom:1px solid rgba(48,54,61,.4);padding-bottom:.5rem;">
+                            <a href="{{ route('link.show', $link->id) }}" style="font-size:.85rem;color:var(--color-gh-accent);font-weight:600;text-decoration:none;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">
+                                {{ $link->title }}
+                            </a>
+                            <div style="font-size:.65rem;color:var(--color-gh-dim);display:flex;align-items:center;gap:.3rem;">
+                                Added by <span style="color:#fff;">{{ $link->user ? $link->user->username : 'Anonymous' }}</span> • {{ $link->created_at->diffForHumans() }}
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            {{-- Latest Comments --}}
+            <div style="background:var(--color-gh-bg);border:1px solid var(--color-gh-border);border-radius:.6rem;padding:1.2rem;">
+                <h3 style="font-size:.85rem;color:var(--color-gh-dim);text-transform:uppercase;letter-spacing:.1em;margin:0 0 1rem;padding-bottom:.5rem;border-bottom:1px solid var(--color-gh-border);">Recent Intel</h3>
+                <div style="display:flex;flex-direction:column;gap:.8rem;">
+                    @foreach($latestComments as $comment)
+                        <div style="display:flex;flex-direction:column;gap:.3rem;border-bottom:1px solid rgba(48,54,61,.4);padding-bottom:.5rem;">
+                            <div style="font-size:.75rem;color:#fff;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">
+                                "{{ \Illuminate\Support\Str::limit($comment->content, 80) }}"
+                            </div>
+                            <div style="font-size:.65rem;color:var(--color-gh-dim);display:flex;align-items:center;gap:.3rem;flex-wrap:wrap;">
+                                <span style="color:#fff;font-weight:600;">{{ $comment->user->username }}</span> on
+                                @if($comment->link)
+                                    <a href="{{ route('link.show', $comment->link->id) }}" style="color:var(--color-gh-accent);text-decoration:none;">{{ \Illuminate\Support\Str::limit($comment->link->title, 15) }}</a>
+                                @else
+                                    <span style="color:var(--color-gh-dim);">Unknown Link</span>
+                                @endif
+                                • {{ $comment->created_at->diffForHumans() }}
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </div>
 
 </x-app.layouts>
