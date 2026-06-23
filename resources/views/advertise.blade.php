@@ -145,219 +145,7 @@
                 privacy-conscious audience pay with Bitcoin.</p>
         </div>
 
-        {{-- ── Announcement Banner ── --}}
-        <div id="announce-banner"
-            style="display:flex;align-items:flex-start;gap:.85rem;padding:.9rem 1.1rem;margin-bottom:1.25rem;border-radius:.5rem;background:linear-gradient(135deg,rgba(88,166,255,.07) 0%,rgba(74,222,128,.05) 100%);border:1px solid rgba(88,166,255,.25);position:relative;">
 
-            <div style="flex:1;min-width:0;">
-                <div style="font-size:.78rem;font-weight:800;color:#fff;letter-spacing:.01em;margin-bottom:.25rem;">
-                    Advertise Form Now Open
-                </div>
-                <p style="font-size:.78rem;color:var(--color-gh-dim);margin:0;line-height:1.55;">
-                    We sincerely apologize if you previously experienced issues submitting the advertise form —
-                    the form was temporarily unavailable due to a technical issue.
-                    <strong style="color:#4ade80;">It is now fully restored and open for submissions.</strong>
-                    Thank you for your patience. 🙏
-                </p>
-            </div>
-            <button onclick="document.getElementById('announce-banner').style.display='none';"
-                style="background:none;border:none;color:var(--color-gh-dim);cursor:pointer;font-size:1rem;line-height:1;padding:.1rem .25rem;flex-shrink:0;opacity:.6;"
-                title="Dismiss">✕</button>
-        </div>
-
-        <div class="stats-contact-grid">
-            {{-- Stats --}}
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;">
-                <div class="premium-card"
-                    style="padding:1.25rem;border-radius:.6rem;text-align:center;display:flex;flex-direction:column;justify-content:center;min-height:90px;">
-                    <div
-                        style="font-size:.6rem;color:var(--color-gh-dim);text-transform:uppercase;letter-spacing:.15em;font-weight:800;margin-bottom:.5rem;">
-                        Network Visibility</div>
-                    <div
-                        style="font-size:1.85rem;font-weight:900;color:var(--color-gh-accent);line-height:1;letter-spacing:-.02em;">
-                        {{ number_format($totalImpressions) }}
-                        <div style="font-size:.6rem;color:var(--color-gh-dim);font-weight:700;margin-top:.3rem;">TOTAL
-                            IMPRESSIONS monthly </div>
-                    </div>
-                </div>
-                <div class="premium-card"
-                    style="padding:1.25rem;border-radius:.6rem;text-align:center;display:flex;flex-direction:column;justify-content:center;min-height:90px;">
-                    <div
-                        style="font-size:.6rem;color:var(--color-gh-dim);text-transform:uppercase;letter-spacing:.15em;font-weight:800;margin-bottom:.5rem;">
-                        Active Engagement</div>
-                    <div style="font-size:1.85rem;font-weight:900;color:#fdb147;line-height:1;letter-spacing:-.02em;">
-                        {{ number_format($totalClicks) }}
-                        <div style="font-size:.6rem;color:var(--color-gh-dim);font-weight:700;margin-top:.3rem;">TOTAL
-                            CLICKS monthly</div>
-                    </div>
-                </div>
-            </div>
-
-            {{-- Contact notice (Restored & Refined) --}}
-            <div class="premium-card"
-                style="background:rgba(88,166,255,.03);padding:1.1rem;border-radius:.6rem;height:100%;box-sizing:border-box;">
-                <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.6rem;">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-gh-accent)"
-                        stroke-width="2.5">
-                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
-                        <polyline points="22,6 12,13 2,6" />
-                    </svg>
-                    <span
-                        style="font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#fff;">Advertising
-                        Support</span>
-                </div>
-                <p style="font-size:.8rem;color:var(--color-gh-dim);margin:0 0 .5rem;line-height:1.4;">Need a custom
-                    campaign or bulk discount?</p>
-                <a href="mailto:{{ config('site.contact_email') }}"
-                    style="display:inline-block;color:var(--color-gh-accent);font-weight:800;font-size:.85rem;text-decoration:none;border-bottom:1px solid rgba(88,166,255,.4);">
-                    {{ config('site.contact_email') }}
-                </a>
-            </div>
-        </div>
-
-        {{-- Active Advertisers --}}
-        @if($activeAds->count() > 0)
-            <div style="margin-bottom:2rem;">
-                <h2
-                    style="font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.12em;color:var(--color-gh-dim);margin:0 0 .85rem;display:flex;align-items:center;gap:.5rem;">
-
-                    Top Performing Campaigns {{ $totalActiveAdsCount }}
-                </h2>
-                <div style="display:flex;flex-direction:column;gap:.5rem;">
-                    @foreach($activeAds as $activeAd)
-                        <div class="premium-card"
-                            style="border-radius:.5rem;padding:.75rem 1.1rem;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;">
-                            <div style="min-width:0;flex:1;">
-                                <div
-                                    style="font-size:.85rem;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:.3rem;">
-                                    {{ $activeAd->title }}
-                                </div>
-                                <div
-                                    style="font-size:.62rem;color:var(--color-gh-dim);display:flex;gap:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.02em;">
-                                    <span style="display:flex;align-items:center;gap:.25rem;">
-                                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                            stroke-width="3" style="margin-top:-1px;">
-                                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-                                            <line x1="16" y1="2" x2="16" y2="6"></line>
-                                            <line x1="8" y1="2" x2="8" y2="6"></line>
-                                            <line x1="3" y1="10" x2="21" y2="10"></line>
-                                        </svg>
-                                        {{ $activeAd->starts_at?->format('d M Y') ?? 'Live' }}
-                                    </span>
-                                    <span style="display:flex;align-items:center;gap:.25rem;">
-                                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#f87171"
-                                            stroke-width="3" style="margin-top:-1px;">
-                                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                                        </svg>
-                                        {{ $activeAd->expires_at?->format('d M Y') ?? 'No Expire' }}
-                                    </span>
-                                </div>
-                            </div>
-                            <div style="display:flex;gap:1.25rem;align-items:center;flex-shrink:0;">
-                                <div style="text-align:right;">
-                                    <div style="font-size:.8rem;font-weight:900;color:var(--color-gh-accent);line-height:1.1;">
-                                        {{ number_format($activeAd->total_impressions ?? 0) }}
-                                    </div>
-                                    <div
-                                        style="font-size:.5rem;font-weight:800;color:var(--color-gh-dim);text-transform:uppercase;letter-spacing:.05em;">
-                                        Views</div>
-                                </div>
-                                <div style="text-align:right;">
-                                    <div style="font-size:.8rem;font-weight:900;color:#fdb147;line-height:1.1;">
-                                        {{ number_format($activeAd->total_clicks ?? 0) }}
-                                    </div>
-                                    <div
-                                        style="font-size:.5rem;font-weight:800;color:var(--color-gh-dim);text-transform:uppercase;letter-spacing:.05em;">
-                                        Clicks</div>
-                                </div>
-                                <a href="{{ route('ad.track', $activeAd->id) }}" target="_blank"
-                                    style="background:var(--color-gh-btn-bg);border:1px solid var(--color-gh-border);color:#fff;padding:.4rem .7rem;border-radius:.4rem;font-size:.62rem;font-weight:900;text-decoration:none;text-transform:uppercase;letter-spacing:.05em;display:flex;align-items:center;gap:.4rem;margin-left:.25rem;">
-                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2.5">
-                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                                        <polyline points="15 3 21 3 21 9"></polyline>
-                                        <line x1="10" y1="14" x2="21" y2="3"></line>
-                                    </svg>
-                                    Visit
-                                </a>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-                @if($totalActiveAdsCount > 3)
-                    <div
-                        style="margin-top:.85rem;text-align:center;font-size:.65rem;font-weight:800;color:var(--color-gh-dim);text-transform:uppercase;letter-spacing:.1em;border-top:1px dashed var(--color-gh-border);padding-top:.85rem;">
-                        Load more ({{ $totalActiveAdsCount }} total campaigns)
-                    </div>
-                @endif
-            </div>
-        @endif
-        <div
-            style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:2.5rem;margin-top:2rem;">
-            {{-- Top Ads By Clicks --}}
-            @if($topAdsByClicks->count() > 0)
-                <div>
-                    <h2
-                        style="font-size:.65rem;font-weight:800;color:var(--color-gh-dim);text-transform:uppercase;letter-spacing:.15em;margin-bottom:1rem;border-left:3px solid var(--color-gh-sponsored);padding-left:.6rem;">
-                        High Engagement (Clicks)</h2>
-                    <table class="leaderboard-table">
-                        @foreach($topAdsByClicks as $index => $ad)
-                            @php $rank = $index + 1; @endphp
-                            <tr class="rank-{{ $rank }}">
-                                <td style="width:40px;">{{ $rank }}</td>
-                                <td>
-                                    <div style="display:flex;flex-direction:column;">
-                                        <span
-                                            style="font-size:.85rem;font-weight:700;color:#fff;">{{ Str::limit($ad->title, 25) }}</span>
-                                        <span
-                                            style="font-size:.65rem;font-family:monospace;color:var(--color-gh-dim);">{{ Str::limit($ad->url, 30) }}</span>
-                                    </div>
-                                </td>
-                                <td style="text-align:right;">
-                                    <div class="stats-count">
-                                        <span class="count-value"
-                                            style="font-size:1.1rem;color:var(--color-gh-sponsored);">{{ number_format($ad->total_clicks) }}</span>
-                                        <span class="count-label">Clicks</span>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </table>
-                </div>
-            @endif
-
-            {{-- Top Ads By Views --}}
-            @if($topAdsByViews->count() > 0)
-                <div>
-                    <h2
-                        style="font-size:.65rem;font-weight:800;color:var(--color-gh-dim);text-transform:uppercase;letter-spacing:.15em;margin-bottom:1rem;border-left:3px solid #3fb950;padding-left:.6rem;">
-                        High Visibility (Views)</h2>
-                    <table class="leaderboard-table">
-                        @foreach($topAdsByViews as $index => $ad)
-                            @php $rank = $index + 1; @endphp
-                            <tr class="rank-{{ $rank }}">
-                                <td style="width:40px;">{{ $rank }}</td>
-                                <td>
-                                    <div style="display:flex;flex-direction:column;">
-                                        <span
-                                            style="font-size:.85rem;font-weight:700;color:#fff;">{{ Str::limit($ad->title, 25) }}</span>
-                                        <span
-                                            style="font-size:.65rem;font-family:monospace;color:var(--color-gh-dim);">{{ Str::limit($ad->url, 30) }}</span>
-                                    </div>
-                                </td>
-                                <td style="text-align:right;">
-                                    <div class="stats-count">
-                                        <span class="count-value"
-                                            style="font-size:1.1rem;color:#3fb950;">{{ number_format($ad->total_views) }}</span>
-                                        <span class="count-label">Views</span>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </table>
-                </div>
-            @endif
-        </div>
         {{-- ═══ Pricing Tiers ═══ --}}
         <div style="margin-bottom:1.5rem;">
             <h2
@@ -365,74 +153,74 @@
                 Choose Your Package</h2>
 
             @foreach($packageGroups as $groupTitle => $groupPkgs)
-                @if(!empty($groupPkgs))
-                    @if(!$loop->first)
-                        <hr style="border:none;border-top:1px dashed rgba(48,54,61,.5);margin:1.25rem 0 .75rem;">
+            @if(!empty($groupPkgs))
+            @if(!$loop->first)
+            <hr style="border:none;border-top:1px dashed rgba(48,54,61,.5);margin:1.25rem 0 .75rem;">
+            @endif
+            <h3
+                style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.15em;color:var(--color-gh-dim);margin:0 0 .6rem;">
+                {{ $groupTitle }}
+            </h3>
+            <div class="pkg-grid" style="{{ count($groupPkgs) == 2 ? 'grid-template-columns: repeat(2, 1fr);' : '' }}">
+                @foreach ($groupPkgs as $pkg)
+                @php
+                $color = $pkg->badgeColor();
+                $icons = [
+                'basic' => '⚡',
+                'standard' => '⭐',
+                'premium' => '💎',
+                'sponsored_14' => '🔗',
+                'sponsored_30' => '🚀',
+                'sidebar_14' => '📌',
+                'sidebar_30' => '🔥'
+                ];
+                $icon = $icons[$pkg->value] ?? '📦';
+                @endphp
+                <div class="premium-card"
+                    style="border-radius:.5rem;overflow:hidden;position:relative;display:flex;flex-direction:column; {{ $pkg->isPopular() ? 'border-color: var(--color-gh-accent);' : '' }}">
+
+                    @if ($pkg->isPopular())
+                    <span
+                        style="position:absolute;top:.5rem;right:.5rem;background:var(--color-gh-accent);color:#0d1117;font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:.2rem .5rem;border-radius:2rem;z-index:1;">Popular</span>
                     @endif
-                    <h3
-                        style="font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:.15em;color:var(--color-gh-dim);margin:0 0 .6rem;">
-                        {{ $groupTitle }}
-                    </h3>
-                    <div class="pkg-grid" style="{{ count($groupPkgs) == 2 ? 'grid-template-columns: repeat(2, 1fr);' : '' }}">
-                        @foreach ($groupPkgs as $pkg)
-                            @php
-                                $color = $pkg->badgeColor();
-                                $icons = [
-                                    'basic' => '⚡',
-                                    'standard' => '⭐',
-                                    'premium' => '💎',
-                                    'sponsored_14' => '🔗',
-                                    'sponsored_30' => '🚀',
-                                    'sidebar_14' => '📌',
-                                    'sidebar_30' => '🔥'
-                                ];
-                                $icon = $icons[$pkg->value] ?? '📦';
-                            @endphp
-                            <div class="premium-card"
-                                style="border-radius:.5rem;overflow:hidden;position:relative;display:flex;flex-direction:column; {{ $pkg->isPopular() ? 'border-color: var(--color-gh-accent);' : '' }}">
 
-                                @if ($pkg->isPopular())
-                                    <span
-                                        style="position:absolute;top:.5rem;right:.5rem;background:var(--color-gh-accent);color:#0d1117;font-size:.58rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;padding:.2rem .5rem;border-radius:2rem;z-index:1;">Popular</span>
-                                @endif
-
-                                <div style="padding:1rem;border-bottom:1px solid var(--color-gh-border);position:relative;">
-                                    <div
-                                        style="width:2.2rem;height:2.2rem;border-radius:.5rem;background:{{ $color }}22;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:.75rem;border:1px solid {{ $color }}44;">
-                                        {{ $icon }}
-                                    </div>
-                                    <div style="color:#fff;font-weight:800;font-size:.9rem;margin-bottom:.15rem;">
-                                        {{ $pkg->label() }}
-                                    </div>
-                                    <div
-                                        style="color:var(--color-gh-dim);font-size:.65rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;">
-                                        {{ $pkg->durationDays() }}-day campaign
-                                    </div>
-                                    <div style="margin-top:.75rem;display:flex;align-items:baseline;gap:.25rem;">
-                                        <span
-                                            style="font-size:1.75rem;font-weight:900;color:#fff;line-height:1;">${{ $pkg->priceUsd() }}</span>
-                                        <span style="font-size:.65rem;color:var(--color-gh-dim);font-weight:700;">USD</span>
-                                    </div>
-                                </div>
-
-                                <div style="padding:1rem;flex:1;">
-                                    <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.5rem;">
-                                        @foreach ($pkg->features() as $feature)
-                                            <li
-                                                style="display:flex;align-items:flex-start;gap:.5rem;font-size:.75rem;color:var(--color-gh-dim);line-height:1.4;">
-                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4ade80"
-                                                    stroke-width="3" style="margin-top:2px;flex-shrink:0;">
-                                                    <polyline points="20 6 9 17 4 12"></polyline>
-                                                </svg>
-                                                <span>{{ $feature }}</span>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            </div>
-                        @endforeach
+                    <div style="padding:1rem;border-bottom:1px solid var(--color-gh-border);position:relative;">
+                        <div
+                            style="width:2.2rem;height:2.2rem;border-radius:.5rem;background:{{ $color }}22;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:.75rem;border:1px solid {{ $color }}44;">
+                            {{ $icon }}
+                        </div>
+                        <div style="color:#fff;font-weight:800;font-size:.9rem;margin-bottom:.15rem;">
+                            {{ $pkg->label() }}
+                        </div>
+                        <div
+                            style="color:var(--color-gh-dim);font-size:.65rem;text-transform:uppercase;letter-spacing:.05em;font-weight:700;">
+                            {{ $pkg->durationDays() }}-day campaign
+                        </div>
+                        <div style="margin-top:.75rem;display:flex;align-items:baseline;gap:.25rem;">
+                            <span
+                                style="font-size:1.75rem;font-weight:900;color:#fff;line-height:1;">${{ $pkg->priceUsd() }}</span>
+                            <span style="font-size:.65rem;color:var(--color-gh-dim);font-weight:700;">USD</span>
+                        </div>
                     </div>
-                @endif
+
+                    <div style="padding:1rem;flex:1;">
+                        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.5rem;">
+                            @foreach ($pkg->features() as $feature)
+                            <li
+                                style="display:flex;align-items:flex-start;gap:.5rem;font-size:.75rem;color:var(--color-gh-dim);line-height:1.4;">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4ade80"
+                                    stroke-width="3" style="margin-top:2px;flex-shrink:0;">
+                                    <polyline points="20 6 9 17 4 12"></polyline>
+                                </svg>
+                                <span>{{ $feature }}</span>
+                            </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            @endif
             @endforeach
         </div>
 
@@ -562,9 +350,9 @@
                             style="width:100%;box-sizing:border-box;background:var(--color-gh-btn-bg);border:1px solid var(--color-gh-border);border-radius:.4rem;padding:.55rem .75rem;color:#fff;font-size:.85rem;outline:none;appearance:none;">
                             <option value="">— Select a package —</option>
                             @foreach ($packages as $pkg)
-                                <option value="{{ $pkg->value }}" {{ old('package_tier') === $pkg->value ? 'selected' : '' }}>
-                                    {{ $pkg->label() }} — ${{ $pkg->priceUsd() }} USD · {{ $pkg->durationDays() }} days
-                                </option>
+                            <option value="{{ $pkg->value }}" {{ old('package_tier') === $pkg->value ? 'selected' : '' }}>
+                                {{ $pkg->label() }} — ${{ $pkg->priceUsd() }} USD · {{ $pkg->durationDays() }} days
+                            </option>
                             @endforeach
                         </select>
                     </div>
@@ -599,7 +387,7 @@
                             <label class="form-label" for="ad-type">Ad Type *</label>
                             <select name="ad_type" id="ad-type" required class="form-input" style="appearance:none;">
                                 @foreach ($adTypes as $type)
-                                    <option value="{{ $type->value }}" {{ old('ad_type') === $type->value ? 'selected' : '' }}>{{ $type->label() }}</option>
+                                <option value="{{ $type->value }}" {{ old('ad_type') === $type->value ? 'selected' : '' }}>{{ $type->label() }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -608,7 +396,7 @@
                             <select name="placement" id="ad-placement" required class="form-input"
                                 style="appearance:none;">
                                 @foreach ($placements as $placement)
-                                    <option value="{{ $placement->value }}" {{ old('placement') === $placement->value ? 'selected' : '' }}>{{ $placement->label() }}</option>
+                                <option value="{{ $placement->value }}" {{ old('placement') === $placement->value ? 'selected' : '' }}>{{ $placement->label() }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -637,15 +425,18 @@
                                 style="width:670px;max-width:100%;height:76px;object-fit:cover;border-radius:.35rem;border:1px solid var(--color-gh-accent);display:block;">
                         </div>
                         <script>
-                            (function () {
+                            (function() {
                                 var inp = document.getElementById('ad-banner');
                                 var wrap = document.getElementById('pub-banner-preview-wrap');
                                 var img = document.getElementById('pub-banner-preview-img');
                                 if (!inp) return;
-                                inp.addEventListener('change', function () {
+                                inp.addEventListener('change', function() {
                                     if (!this.files || !this.files[0]) return;
                                     var r = new FileReader();
-                                    r.onload = function (e) { img.src = e.target.result; wrap.style.display = 'block'; };
+                                    r.onload = function(e) {
+                                        img.src = e.target.result;
+                                        wrap.style.display = 'block';
+                                    };
                                     r.readAsDataURL(this.files[0]);
                                 });
                             })();
