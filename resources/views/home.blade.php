@@ -256,9 +256,12 @@
         <span style="color:var(--color-gh-border);">|</span>
 
         <div style="display:flex;align-items:center;gap:0.4rem;">
+
             <span style="font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:0.05em;">Last Comment:</span>
-            <span style="color:var(--color-gh-dim);">"{{ \Illuminate\Support\Str::limit($latestComment->content, 30) }}"</span>
-            <span style="font-size:0.65rem;opacity:0.8;">by {{ $latestComment->username }} ({{ $latestComment->created_at->diffForHumans() }})</span>
+            <a href="{{ route('link.show', $latestComment->link->slug) }}" style="color:var(--color-gh-accent);font-weight:600;text-decoration:none;">
+                <span style="color:var(--color-gh-dim);">"{{ \Illuminate\Support\Str::limit($latestComment->content, 30) }}"</span>
+                <span style="font-size:0.65rem;opacity:0.8;">by {{ $latestComment->username }} ({{ $latestComment->created_at->diffForHumans() }})</span>
+            </a>
         </div>
         @endif
     </div>
