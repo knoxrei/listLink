@@ -41,27 +41,7 @@
 
     {{-- Header Ad --}}
     {{-- Header Ad Grid --}}
-    @if (isset($headerAds) && $headerAds->count() > 0)
-        <div class="dir-ads-grid">
-            @foreach ($headerAds as $headerAd)
-                <div class="dir-ad-box">
-                    <span style="position:absolute;top:.2rem;right:.4rem;background:rgba(0,0,0,.7);color:var(--color-gh-sponsored);padding:.1rem .35rem;border-radius:.2rem;font-size:8px;font-weight:800;text-transform:uppercase;z-index:1;border:1px solid rgba(210,153,34,.2);">Sponsored</span>
-                    @if ($headerAd->banner_path)
-                        <a href="{{ route('ad.track', $headerAd->id) }}" style="display:block;width:100%;height:100%;">
-                            <img src="{{ asset('storage/' . $headerAd->banner_path) }}" alt="{{ $headerAd->title }}" style="width:100%;height:100%;object-fit:cover;">
-                        </a>
-                    @else
-                        <a href="{{ route('ad.track', $headerAd->id) }}" style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;text-decoration:none;background:var(--color-gh-btn-bg);">
-                            <div style="text-align:center;">
-                                <div style="font-size:.7rem;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.05em;">{{ $headerAd->title }}</div>
-                                <div style="font-size:.55rem;font-family:monospace;color:var(--color-gh-dim);opacity:.6;">{{ $headerAd->url }}</div>
-                            </div>
-                        </a>
-                    @endif
-                </div>
-            @endforeach
-        </div>
-    @endif
+    <x-app.ads />
 
     <div class="dir-layout">
 
@@ -260,23 +240,7 @@
                 </div>
             </div>
 
-            {{-- Sidebar Ads --}}
-            @if (isset($sidebarAds) && $sidebarAds->count() > 0)
-                @foreach ($sidebarAds as $sideAd)
-                    <div style="position:relative;width:100%;height:180px;border-radius:.5rem;overflow:hidden;border:1px solid var(--color-gh-border);">
-                        <span style="position:absolute;top:.3rem;right:.45rem;background:rgba(0,0,0,.75);color:var(--color-gh-sponsored);padding:.1rem .35rem;border-radius:.2rem;font-size:.55rem;font-weight:800;text-transform:uppercase;z-index:1;">Ad</span>
-                        @if ($sideAd->banner_path)
-                            <a href="{{ route('ad.track', $sideAd->id) }}" style="display:block;width:100%;height:100%;">
-                                <img src="{{ asset('storage/' . $sideAd->banner_path) }}" alt="{{ $sideAd->title }}" style="width:100%;height:100%;object-fit:cover;">
-                            </a>
-                        @else
-                            <a href="{{ route('ad.track', $sideAd->id) }}" style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;text-decoration:none;background:var(--color-gh-btn-bg);">
-                                <span style="font-size:.8rem;font-weight:700;color:#fff;text-align:center;padding:.75rem;">{{ $sideAd->title }}</span>
-                            </a>
-                        @endif
-                    </div>
-                @endforeach
-            @endif
+
 
         </aside>
     </div>

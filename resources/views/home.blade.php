@@ -199,27 +199,7 @@
 
 
 
-            {{-- Internal Header Ads --}}
-            @if (isset($headerAds) && $headerAds->count() > 0)
-            <div class="home-ads-grid">
-                @foreach ($headerAds as $ad)
-                <div style="position:relative;width:468px;height:60px;border-radius:.4rem;overflow:hidden;border:1px solid var(--color-gh-border);flex-shrink:0;">
-                    @if ($ad->banner_path)
-                    <a href="{{ route('ad.track', $ad->id) }}" style="display:block;width:100%;height:100%;">
-                        <img src="{{ asset('storage/' . $ad->banner_path) }}" alt="{{ $ad->title }}" style="width:100%;height:100%;object-fit:cover;">
-                    </a>
-                    @else
-                    <a href="{{ route('ad.track', $ad->id) }}" style="display:flex;width:100%;height:100%;align-items:center;justify-content:center;text-decoration:none;background:var(--color-gh-btn-bg);">
-                        <div style="text-align:center;">
-                            <div style="font-size:.7rem;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.05em;">{{ $ad->title }}</div>
-                            <div style="font-size:.55rem;font-family:monospace;color:var(--color-gh-dim);opacity:.6;">{{ $ad->url }}</div>
-                        </div>
-                    </a>
-                    @endif
-                </div>
-                @endforeach
-            </div>
-            @endif
+            <x-app.ads />
 
         </div>
 

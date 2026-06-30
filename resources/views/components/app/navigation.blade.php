@@ -5,12 +5,12 @@
         class="text-gh-dim no-underline text-sm font-medium transition-colors hover:text-gh-accent {{ request()->routeIs('directory') ? 'text-gh-accent' : '' }}">Directory</a>
     <a href="{{ route('submit.create') }}"
         class="text-gh-dim no-underline text-sm font-medium transition-colors hover:text-gh-accent {{ request()->routeIs('submit.*') ? 'text-gh-accent' : '' }}">Submit</a>
-    <a href="{{ route('advertise.create') }}"
-        class="text-gh-dim no-underline text-sm font-medium transition-colors hover:text-gh-accent {{ request()->routeIs('advertise.*') ? 'text-gh-accent' : '' }}">Ads</a>
+    <a href="{{ config('app.advertise_url') }}"
+        class="text-gh-dim no-underline text-sm font-medium transition-colors hover:text-gh-accent">Ads</a>
     <a href="{{ route('about') }}"
         class="text-gh-dim no-underline text-sm font-medium transition-colors hover:text-gh-accent {{ request()->routeIs('about') ? 'text-gh-accent' : '' }}">About</a>
-    <a href="{{ route('support.index') }}"
-        class="text-gh-dim no-underline text-sm font-medium transition-colors hover:text-gh-accent {{ request()->routeIs('support.*') ? 'text-gh-accent' : '' }}">Support</a>
+    <a href="{{ config('app.support_url') }}"
+        class="text-gh-dim no-underline text-sm font-medium transition-colors hover:text-gh-accent">Support</a>
 
     @auth
         @if(auth()->user()->isAdmin())

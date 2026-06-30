@@ -8,11 +8,12 @@
     <link rel="manifest" href="/site.webmanifest">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://adknox.subhub.tr/js/get-banners.js" async></script>
 
     {{-- SEO & Standard Meta --}}
     @php
-        $totalActiveNodes = \App\Models\Link::active()->count();
-        $defaultDescription = config('app.name') . " — The elite privacy-focused directory for the Tor network. Explore " . number_format($totalActiveNodes) . "+ verified .onion services with high-precision uptime monitoring and deep indexing. No JavaScript. No tracking. Pure performance.";
+    $totalActiveNodes = \App\Models\Link::active()->count();
+    $defaultDescription = config('app.name') . " — The elite privacy-focused directory for the Tor network. Explore " . number_format($totalActiveNodes) . "+ verified .onion services with high-precision uptime monitoring and deep indexing. No JavaScript. No tracking. Pure performance.";
     @endphp
     <meta name="description" content="{{ $description ?? $defaultDescription }}">
     <meta name="keywords"
@@ -141,22 +142,22 @@
 
                 {{-- Search bar (hidden on mobile) --}}
                 @if(!request()->routeIs('home') && !request()->routeIs('search.index'))
-                    <form action="{{ route('search.index') }}" method="GET" class="header-search">
-                        <div
-                            style="display:flex;align-items:center;background:var(--color-gh-btn-bg);border:1px solid var(--color-gh-border);border-radius:.45rem;overflow:hidden;">
-                            <span style="padding:0 .75rem;color:var(--color-gh-dim);display:flex;align-items:center;">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2.5">
-                                    <circle cx="11" cy="11" r="8" />
-                                    <path d="M21 21l-4.35-4.35" />
-                                </svg>
-                            </span>
-                            <input type="text" name="q" placeholder="Search verified nodes..." value="{{ request('q') }}"
-                                style="background:transparent;border:none;color:#fff;padding:.45rem 0;width:100%;outline:none;font-size:.85rem;">
-                        </div>
-                    </form>
+                <form action="{{ route('search.index') }}" method="GET" class="header-search">
+                    <div
+                        style="display:flex;align-items:center;background:var(--color-gh-btn-bg);border:1px solid var(--color-gh-border);border-radius:.45rem;overflow:hidden;">
+                        <span style="padding:0 .75rem;color:var(--color-gh-dim);display:flex;align-items:center;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2.5">
+                                <circle cx="11" cy="11" r="8" />
+                                <path d="M21 21l-4.35-4.35" />
+                            </svg>
+                        </span>
+                        <input type="text" name="q" placeholder="Search verified nodes..." value="{{ request('q') }}"
+                            style="background:transparent;border:none;color:#fff;padding:.45rem 0;width:100%;outline:none;font-size:.85rem;">
+                    </div>
+                </form>
                 @else
-                    <div style="flex:1;"></div>
+                <div style="flex:1;"></div>
                 @endif
 
                 {{-- Hamburger (mobile only) --}}
@@ -177,31 +178,31 @@
                         style="color:var(--color-gh-dim);text-decoration:none;font-size:.82rem;font-weight:600;{{ request()->routeIs('directory') ? 'color:var(--color-gh-accent);' : '' }}">Directory</a>
                     <a href="{{ route('submit.create') }}"
                         style="color:var(--color-gh-dim);text-decoration:none;font-size:.82rem;font-weight:600;{{ request()->routeIs('submit.*') ? 'color:var(--color-gh-accent);' : '' }}">Submit</a>
-                    <a href="{{ route('advertise.create') }}"
-                        style="color:var(--color-gh-dim);text-decoration:none;font-size:.82rem;font-weight:600;{{ request()->routeIs('advertise.*') ? 'color:var(--color-gh-accent);' : '' }}">Ads</a>
-                    <a href="{{ route('support.index') }}"
-                        style="color:var(--color-gh-dim);text-decoration:none;font-size:.82rem;font-weight:600;{{ request()->routeIs('support.*') ? 'color:var(--color-gh-accent);' : '' }}">Support</a>
+                    <a href="{{ config('app.advertise_url') }}"
+                        style="color:var(--color-gh-dim);text-decoration:none;font-size:.82rem;font-weight:600;">Ads</a>
+                    <a href="{{ config('app.support_url') }}"
+                        style="color:var(--color-gh-dim);text-decoration:none;font-size:.82rem;font-weight:600;">Support</a>
                     <a href="{{ route('leaderboard') }}"
                         style="color:var(--color-gh-dim);text-decoration:none;font-size:.82rem;font-weight:600;{{ request()->routeIs('leaderboard') ? 'color:var(--color-gh-accent);' : '' }}">Elite</a>
 
                     @auth
-                        @if(auth()->user()->isAdmin())
-                            <a href="{{ route('admin.dashboard') }}"
-                                style="color:var(--color-gh-dim);text-decoration:none;font-size:.82rem;font-weight:600;{{ request()->routeIs('admin.*') ? 'color:var(--color-gh-accent);' : '' }}">Admin</a>
-                        @endif
-                        <a href="{{ route('dashboard') }}"
-                            style="color:var(--color-gh-dim);text-decoration:none;font-size:.82rem;font-weight:600;{{ request()->routeIs('dashboard') ? 'color:var(--color-gh-accent);' : '' }}">Dashboard</a>
-                        <form action="{{ route('logout') }}" method="POST" style="display:inline;">
-                            @csrf
-                            <button type="submit"
-                                style="background:none;border:none;color:var(--color-accent-red);cursor:pointer;font-size:.82rem;padding:0;font-family:inherit;font-weight:600;">Logout</button>
-                        </form>
+                    @if(auth()->user()->isAdmin())
+                    <a href="{{ route('admin.dashboard') }}"
+                        style="color:var(--color-gh-dim);text-decoration:none;font-size:.82rem;font-weight:600;{{ request()->routeIs('admin.*') ? 'color:var(--color-gh-accent);' : '' }}">Admin</a>
+                    @endif
+                    <a href="{{ route('dashboard') }}"
+                        style="color:var(--color-gh-dim);text-decoration:none;font-size:.82rem;font-weight:600;{{ request()->routeIs('dashboard') ? 'color:var(--color-gh-accent);' : '' }}">Dashboard</a>
+                    <form action="{{ route('logout') }}" method="POST" style="display:inline;">
+                        @csrf
+                        <button type="submit"
+                            style="background:none;border:none;color:var(--color-accent-red);cursor:pointer;font-size:.82rem;padding:0;font-family:inherit;font-weight:600;">Logout</button>
+                    </form>
                     @else
-                        <a href="{{ route('login.form') }}"
-                            style="color:var(--color-gh-dim);text-decoration:none;font-size:.82rem;font-weight:600;">Login</a>
-                        <a href="{{ route('register.form') }}"
-                            style="color:var(--color-gh-accent);text-decoration:none;font-size:.82rem;font-weight:700;border:1px solid var(--color-gh-accent);padding:.35rem .85rem;border-radius:.35rem;text-align:center;white-space:nowrap;">Join
-                            Our Team</a>
+                    <a href="{{ route('login.form') }}"
+                        style="color:var(--color-gh-dim);text-decoration:none;font-size:.82rem;font-weight:600;">Login</a>
+                    <a href="{{ route('register.form') }}"
+                        style="color:var(--color-gh-accent);text-decoration:none;font-size:.82rem;font-weight:700;border:1px solid var(--color-gh-accent);padding:.35rem .85rem;border-radius:.35rem;text-align:center;white-space:nowrap;">Join
+                        Our Team</a>
                     @endauth
                 </nav>
             </div>
@@ -211,8 +212,8 @@
     {{-- ═══ Ad Banners: Top ═══ --}}
     <div
         style="max-width:1100px;margin:.75rem auto 0;padding:0 1rem;display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;gap:.75rem;">
-        <div id="banner-place-468-1"></div>
-        <div id="banner-place-468-2"></div>
+        <div id="admate-banner-place-468-1"></div>
+        <div id="admate-banner-place-468-2"></div>
     </div>
 
     {{-- ═══ Main Content ═══ --}}
@@ -220,38 +221,38 @@
         <div style="max-width:1100px;margin:0 auto;padding:0 1rem;">
             {{-- Flash Messages --}}
             @if (session('success'))
-                <div
-                    style="background:rgba(35,134,54,.15);border:1px solid rgba(35,134,54,.4);color:#3fb950;padding:.65rem 1rem;border-radius:.4rem;margin-bottom:1rem;font-size:.82rem;">
-                    {{ session('success') }}
-                </div>
+            <div
+                style="background:rgba(35,134,54,.15);border:1px solid rgba(35,134,54,.4);color:#3fb950;padding:.65rem 1rem;border-radius:.4rem;margin-bottom:1rem;font-size:.82rem;">
+                {{ session('success') }}
+            </div>
             @endif
             @if (session('info'))
-                <div
-                    style="background:rgba(88,166,255,.12);border:1px solid rgba(88,166,255,.3);color:var(--color-gh-accent);padding:.65rem 1rem;border-radius:.4rem;margin-bottom:1rem;font-size:.82rem;">
-                    {{ session('info') }}
-                </div>
+            <div
+                style="background:rgba(88,166,255,.12);border:1px solid rgba(88,166,255,.3);color:var(--color-gh-accent);padding:.65rem 1rem;border-radius:.4rem;margin-bottom:1rem;font-size:.82rem;">
+                {{ session('info') }}
+            </div>
             @endif
             @if (session('check_result'))
-                <div
-                    style="background:rgba(88,166,255,.12);border:1px solid rgba(88,166,255,.3);color:var(--color-gh-accent);padding:.65rem 1rem;border-radius:.4rem;margin-bottom:1rem;font-size:.82rem;">
-                    {{ session('check_result') }}
-                </div>
+            <div
+                style="background:rgba(88,166,255,.12);border:1px solid rgba(88,166,255,.3);color:var(--color-gh-accent);padding:.65rem 1rem;border-radius:.4rem;margin-bottom:1rem;font-size:.82rem;">
+                {{ session('check_result') }}
+            </div>
             @endif
             @if (session('error'))
-                <div
-                    style="background:rgba(248,81,73,.12);border:1px solid rgba(248,81,73,.3);color:#f85149;padding:.65rem 1rem;border-radius:.4rem;margin-bottom:1rem;font-size:.82rem;">
-                    {{ session('error') }}
-                </div>
+            <div
+                style="background:rgba(248,81,73,.12);border:1px solid rgba(248,81,73,.3);color:#f85149;padding:.65rem 1rem;border-radius:.4rem;margin-bottom:1rem;font-size:.82rem;">
+                {{ session('error') }}
+            </div>
             @endif
             @if ($errors->any())
-                <div
-                    style="background:rgba(248,81,73,.12);border:1px solid rgba(248,81,73,.3);color:#f85149;padding:.65rem 1rem;border-radius:.4rem;margin-bottom:1rem;font-size:.82rem;">
-                    <ul style="margin:0;padding-left:1.2rem;">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
+            <div
+                style="background:rgba(248,81,73,.12);border:1px solid rgba(248,81,73,.3);color:#f85149;padding:.65rem 1rem;border-radius:.4rem;margin-bottom:1rem;font-size:.82rem;">
+                <ul style="margin:0;padding-left:1.2rem;">
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
             @endif
 
             {{ $slot }}
@@ -261,8 +262,8 @@
     {{-- ═══ Ad Banners: Bottom ═══ --}}
     <div
         style="max-width:1100px;margin:2rem auto 0;padding:0 1rem;display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;gap:.75rem;">
-        <div id="banner-place-468-3"></div>
-        <div id="banner-place-468-4"></div>
+        <div id="admate-banner-place-468-3"></div>
+        <div id="admate-banner-place-468-4"></div>
     </div>
 
     {{-- ═══ Footer ═══ --}}
@@ -281,9 +282,9 @@
                     style="color:var(--color-gh-dim);text-decoration:none;font-size:.78rem;">Offline Link</a>
                 <a href="{{ route('about') }}"
                     style="color:var(--color-gh-dim);text-decoration:none;font-size:.78rem;">About</a>
-                <a href="{{ route('support.index') }}"
+                <a href="{{ config('app.support_url') }}"
                     style="color:var(--color-gh-dim);text-decoration:none;font-size:.78rem;">Support</a>
-                <a href="{{ route('advertise.create') }}"
+                <a href="{{ config('app.advertise_url') }}"
                     style="color:var(--color-gh-dim);text-decoration:none;font-size:.78rem;">Advertise</a>
                 <a href="{{ route('leaderboard') }}"
                     style="color:var(--color-gh-dim);text-decoration:none;font-size:.78rem;">Leaderboard</a>
@@ -297,16 +298,32 @@
         </div>
     </footer>
     {{-- Ad Partner: Admate – load 4 banners (min 2, max 4) --}}
-    <script>getBanners("http://admate3tczgp6digew7jpzcosq52rs7anru53imwqimron27emq7dbqd.onion/api/get-banner/s4bSEp2XFUpCAA4o/type/468-60/count/4");</script>
-    <script type="text/javascript">var _Hasync = _Hasync || [];
+    <script>
+        getBanners("http://admate3tczgp6digew7jpzcosq52rs7anru53imwqimron27emq7dbqd.onion/api/get-banner/s4bSEp2XFUpCAA4o/type/468-60/count/4");
+    </script>
+    <script type="text/javascript">
+        var _Hasync = _Hasync || [];
         _Hasync.push(['Histats.start', '1,5021655,4,0,0,0,00010000']);
         _Hasync.push(['Histats.fasi', '1']);
         _Hasync.push(['Histats.track_hits', '']);
-        (function () {
-            var hs = document.createElement('script'); hs.type = 'text/javascript'; hs.async = true;
+        (function() {
+            var hs = document.createElement('script');
+            hs.type = 'text/javascript';
+            hs.async = true;
             hs.src = ('//s10.histats.com/js15_as.js');
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
-        })();</script>
+        })();
+    </script>
+    <script>
+        (window.getBanners = window.getBanners || function(c) {
+            (window.admateQueue = window.admateQueue || []).push(c)
+        })({
+            "clearnet": "https://adknox.subhub.tr",
+            "tor": "http://adknoxoyhrexnc5b7mtnedh6dwvprhp7avobjem6wpte3kguvigt44yd.onion",
+            "tracking": "j7STHuuiC9",
+            "type": "468-60"
+        });
+    </script>
     <noscript><a href="/" target="_blank"><img src="//sstatic1.histats.com/0.gif?5021655&101" alt=""
                 border="0"></a></noscript>
 </body>

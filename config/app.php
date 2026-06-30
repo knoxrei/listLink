@@ -105,6 +105,9 @@ return [
         ),
     ],
 
+    'advertise_url' => env('ADVERTISE_URL', 'https://adknox.subhub.tr'),
+    'support_url' => env('SUPPORT_URL', 'https://adknox.subhub.tr/support-us'),
+
     /*
     |--------------------------------------------------------------------------
     | Maintenance Mode Driver
