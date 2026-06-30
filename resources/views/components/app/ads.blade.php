@@ -7,6 +7,7 @@
         justify-items: center;
         width: 100%;
     }
+
     @media (min-width: 1024px) {
         .search-ads-grid {
             grid-template-columns: 1fr 1fr;
