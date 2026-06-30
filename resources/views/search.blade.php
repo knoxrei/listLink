@@ -594,6 +594,7 @@
 
 
 
+        {{-- Header Ad Grid (Has Query) --}}
         <x-app.ads style="margin-bottom: 1.5rem;" />
 
         {{-- Compact search bar with Logo --}}
@@ -921,6 +922,9 @@
                     </div>
                 </div>
                 @endif
+
+                {{-- Sidebar Ads (Internal) --}}
+                <x-app.ads class="sidebar-ads-grid" style="display:flex; flex-direction:column; gap:1rem;" />
             </aside>
 
         </div>

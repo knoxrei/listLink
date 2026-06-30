@@ -181,7 +181,8 @@
                 </div>
             </div>
 
-
+            {{-- Sidebar Ads --}}
+            <x-app.ads class="sidebar-ads-grid" style="display:flex; flex-direction:column; gap:1rem;" />
         </aside>
 
     </div>

@@ -347,7 +347,8 @@
 
                 </div>
 
-
+                {{-- Sidebar Ads (Internal) --}}
+                <x-app.ads class="sidebar-ads-grid" style="display:flex; flex-direction:column; gap:1rem;" />
 
                 {{-- Security notice --}}
                 <div style="border:1px solid rgba(248,113,113,.2);border-radius:.5rem;padding:.85rem 1rem;">

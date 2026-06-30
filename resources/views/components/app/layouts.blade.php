@@ -212,8 +212,8 @@
     {{-- ═══ Ad Banners: Top ═══ --}}
     <div
         style="max-width:1100px;margin:.75rem auto 0;padding:0 1rem;display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;gap:.75rem;">
-        <div id="admate-banner-place-468-1"></div>
-        <div id="admate-banner-place-468-2"></div>
+        <div id="banner-place-468-1"></div>
+        <div id="banner-place-468-2"></div>
     </div>
 
     {{-- ═══ Main Content ═══ --}}
@@ -262,8 +262,8 @@
     {{-- ═══ Ad Banners: Bottom ═══ --}}
     <div
         style="max-width:1100px;margin:2rem auto 0;padding:0 1rem;display:flex;flex-direction:row;flex-wrap:wrap;justify-content:center;gap:.75rem;">
-        <div id="admate-banner-place-468-3"></div>
-        <div id="admate-banner-place-468-4"></div>
+        <div id="banner-place-468-3"></div>
+        <div id="banner-place-468-4"></div>
     </div>
 
     {{-- ═══ Footer ═══ --}}
