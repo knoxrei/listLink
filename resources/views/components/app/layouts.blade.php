@@ -8,8 +8,15 @@
     <link rel="manifest" href="/site.webmanifest">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://adknox.subhub.tr/js/get-banners.js" async></script>
-
+<script>
+(function() {
+    var s = document.createElement('script');
+    var isTor = /\.onion$/.test(window.location.hostname);
+    s.src = (isTor ? 'http://adknoxoyhrexnc5b7mtnedh6dwvprhp7avobjem6wpte3kguvigt44yd.onion' : 'https://adknox.subhub.tr') + '/js/get-banners.js?v=2';
+    s.async = true;
+    document.head.appendChild(s);
+})();
+</script>
     {{-- SEO & Standard Meta --}}
     @php
     $totalActiveNodes = \App\Models\Link::active()->count();
@@ -43,6 +50,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     {{-- Ad Partner: Admate --}}
+    <script src="http://admate3tczgp6digew7jpzcosq52rs7anru53imwqimron27emq7dbqd.onion/js/get-banners.js"></script>
 
     <style>
         /* ── Mobile nav toggle ── */
