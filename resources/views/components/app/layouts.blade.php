@@ -9,14 +9,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script>
-        (function() {
-            var s = document.createElement('script');
-            var isTor = /\.onion$/.test(window.location.hostname);
-            s.src = (isTor ? 'http://adknoxoyhrexnc5b7mtnedh6dwvprhp7avobjem6wpte3kguvigt44yd.onion' : 'https://adknox.subhub.tr') + '/js/get-banners.js?v=2';
-            s.async = true;
-            document.head.appendChild(s);
-        })();
-    </script>
+(function() {
+    var s = document.createElement('script');
+    var isTor = /\.onion$/.test(window.location.hostname);
+    s.src = (isTor ? 'http://adknoxoyhrexnc5b7mtnedh6dwvprhp7avobjem6wpte3kguvigt44yd.onion' : 'https://adknox.subhub.tr') + '/js/get-banners.js?v=2';
+    s.async = true;
+    document.head.appendChild(s);
+})();
+</script>
+
     {{-- SEO & Standard Meta --}}
     @php
     $totalActiveNodes = \App\Models\Link::active()->count();
@@ -50,6 +51,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     {{-- Ad Partner: Admate --}}
+    <script src="http://admate3tczgp6digew7jpzcosq52rs7anru53imwqimron27emq7dbqd.onion/js/get-banners.js"></script>
 
     <style>
         /* ── Mobile nav toggle ── */
@@ -320,16 +322,7 @@
             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(hs);
         })();
     </script>
-    <script>
-        (window.getBanners = window.getBanners || function(c) {
-            (window.admateQueue = window.admateQueue || []).push(c)
-        })({
-            "clearnet": "https://adknox.subhub.tr",
-            "tor": "http://adknoxoyhrexnc5b7mtnedh6dwvprhp7avobjem6wpte3kguvigt44yd.onion",
-            "tracking": "j7STHuuiC9",
-            "type": "468-60"
-        });
-    </script>
+    <script>(window.getbannersadknox = window.getbannersadknox || function(c){(window.admateQueue = window.admateQueue || []).push(c)})({"clearnet":"https://adknox.subhub.tr","tor":"http://adknoxoyhrexnc5b7mtnedh6dwvprhp7avobjem6wpte3kguvigt44yd.onion","tracking":"j7STHuuiC9","type":"468-60"});</script>
     <noscript><a href="/" target="_blank"><img src="//sstatic1.histats.com/0.gif?5021655&101" alt=""
                 border="0"></a></noscript>
 </body>
