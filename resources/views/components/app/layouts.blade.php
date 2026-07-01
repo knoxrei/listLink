@@ -43,7 +43,6 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     {{-- Ad Partner: Admate --}}
-    <script src="http://admate3tczgp6digew7jpzcosq52rs7anru53imwqimron27emq7dbqd.onion/js/get-banners.js"></script>
 
     <style>
         /* ── Mobile nav toggle ── */
